@@ -32,6 +32,8 @@ describe('usePostsQuery', () => {
       wrapper,
     })
 
+    expect(result.current.isLoading).toBe(true)
+
     await waitForNextUpdate()
 
     const posts: Post[] = [

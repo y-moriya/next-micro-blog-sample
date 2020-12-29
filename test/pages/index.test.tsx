@@ -3,8 +3,6 @@ import { render } from '../testUtils'
 import { Home } from '../../pages/index'
 import client, { Session } from 'next-auth/client'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { renderHook } from '@testing-library/react-hooks'
-import { usePostsQuery } from '../../hooks/usePostsQuery'
 
 jest.mock('next-auth/client')
 
