@@ -1,28 +1,37 @@
 import React from 'react'
-import { render, fireEvent } from '../testUtils'
+import { render } from '../testUtils'
 import { Home } from '../../pages/index'
-import client, { Session } from "next-auth/client"
-jest.mock("next-auth/client")
+import client, { Session } from 'next-auth/client'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { renderHook } from '@testing-library/react-hooks'
+import { usePostsQuery } from '../../hooks/usePostsQuery'
+
+jest.mock('next-auth/client')
 
 beforeAll(() => {
   const mockSession: Session = {
-    expires: "1",
-    user: { email: "euro21st@gmail.com", name: "Yu MORIYA", image: "c"}
-  };
+    expires: '1',
+    user: { email: 'euro21st@gmail.com', name: 'Yu MORIYA', image: 'c' },
+  }
 
-  (client.useSession as jest.Mock).mockReturnValueOnce([mockSession, false])
+  ;(client.useSession as jest.Mock).mockReturnValueOnce([mockSession, false])
 })
 
 describe('Home page', () => {
-  it('matches snapshot', () => {
-    const { asFragment } = render(<Home />, {})
+  it('matches snapshot', async () => {
+    const queryClient = new QueryClient({
+      defaultOptions: {
+        queries: {},
+        mutations: {},
+      },
+    })
+
+    const { asFragment } = render(
+      <QueryClientProvider client={queryClient}>
+        <Home />
+      </QueryClientProvider>,
+      {}
+    )
     expect(asFragment()).toMatchSnapshot()
   })
-
-  // it('clicking button triggers alert', () => {
-  //   const { getByText } = render(<Home />, {})
-  //   window.alert = jest.fn()
-  //   fireEvent.click(getByText('Test Button'))
-  //   expect(window.alert).toHaveBeenCalledWith('With typescript and Jest')
-  // })
 })

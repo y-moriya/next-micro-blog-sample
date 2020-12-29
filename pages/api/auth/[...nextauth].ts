@@ -1,16 +1,16 @@
-import NextAuth from "next-auth";
-import Providers from "next-auth/providers";
-import Adapters from "next-auth/adapters";
-import { PrismaClient } from "@prisma/client";
-let prisma;
+import NextAuth from 'next-auth'
+import Providers from 'next-auth/providers'
+import Adapters from 'next-auth/adapters'
+import { PrismaClient } from '@prisma/client'
+let prisma
 
-if (process.env.NODE_ENV === "production") {
-  prisma = new PrismaClient();
+if (process.env.NODE_ENV === 'production') {
+  prisma = new PrismaClient()
 } else {
   if (!global.prisma) {
-    global.prisma = new PrismaClient();
+    global.prisma = new PrismaClient()
   }
-  prisma = global.prisma;
+  prisma = global.prisma
 }
 const options = {
   providers: [
@@ -20,5 +20,12 @@ const options = {
     }),
   ],
   adapter: Adapters.Prisma.Adapter({ prisma }),
-};
-export default (req, res) => NextAuth(req, res, options);
+  callbacks: {
+    session: async (session, user) => {
+      session.user.id = user.id
+
+      return Promise.resolve(session)
+    },
+  },
+}
+export default (req, res) => NextAuth(req, res, options)

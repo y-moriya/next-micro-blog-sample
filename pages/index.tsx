@@ -1,6 +1,9 @@
-import { signIn, signOut, useSession } from "next-auth/client";
+import { signIn, signOut, useSession } from 'next-auth/client'
+import PostList from '../components/PostList'
+import NewPostForm from '../components/NewPostForm'
+
 export const Home = (): JSX.Element => {
-  const [session, loading] = useSession();
+  const [session, loading] = useSession()
   return (
     <>
       {loading ? <>Now loading...</> : null}
@@ -14,6 +17,8 @@ export const Home = (): JSX.Element => {
         <>
           サインイン完了。 email: {session.user.email} <br />
           <button onClick={signOut}>Sign out</button>
+          <NewPostForm />
+          <PostList />
         </>
       )}
     </>

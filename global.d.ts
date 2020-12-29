@@ -1,8 +1,8 @@
-export {};
+export {}
 declare global {
   namespace NodeJS {
     interface Global {
-      prisma: any;
+      prisma: any
     }
   }
 }
