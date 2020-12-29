@@ -1,12 +1,13 @@
 import { signIn, signOut, useSession } from "next-auth/client";
-export default function Home() {
+export const Home = (): JSX.Element => {
   const [session, loading] = useSession();
   return (
     <>
+      {loading ? <>Now loading...</> : null}
       {!session && (
         <>
           サインインしてください。 <br />
-          <button onClick={signIn}>Sign in</button>
+          <button onClick={() => signIn('google')}>Sign in</button>
         </>
       )}
       {session && (
@@ -16,5 +17,7 @@ export default function Home() {
         </>
       )}
     </>
-  );
+  )
 }
+
+export default Home

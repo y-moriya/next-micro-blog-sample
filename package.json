@@ -4,8 +4,10 @@
   "license": "MIT",
   "version": "1.0.0",
   "scripts": {
+    "migrate:deploy": "prisma migrate deploy --preview-feature",
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm-run-all migrate:deploy build-app",
+    "build-app": "next build",
     "start": "next start",
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write .",
@@ -49,6 +51,7 @@
     "jest": "^25.2.3",
     "jest-watch-typeahead": "^0.5.0",
     "lint-staged": "^10.0.10",
+    "npm-run-all": "~4.1.5",
     "prettier": "^2.0.2",
     "typescript": "^3.8.3"
   }
