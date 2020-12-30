@@ -12,7 +12,7 @@
     "type-check": "tsc --pretty --noEmit",
     "format": "prettier --write .",
     "lint": "eslint . --ext ts --ext tsx --ext js",
-    "test": "jest",
+    "test": "TZ=Asia/Tokyo jest",
     "test-all": "yarn lint && yarn type-check && yarn test"
   },
   "husky": {
@@ -30,6 +30,7 @@
   "dependencies": {
     "@prisma/client": "^2.13.1",
     "date-fns": "^2.16.1",
+    "date-fns-tz": "^1.0.12",
     "fetch-mock": "^9.11.0",
     "next": "latest",
     "next-auth": "3.2.0-canary.2",
