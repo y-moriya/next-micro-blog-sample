@@ -20,6 +20,9 @@ export default async function handlePosts(
 
   if (req.method === 'GET') {
     const posts = await prisma.post.findMany({
+      include: {
+        User: true
+      },
       orderBy: {
         createdAt: 'desc',
       },

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`New Post Form matches snapshot 1`] = `
+<DocumentFragment>
+  <form
+    style="display: flex; flex-direction: column;"
+  >
+    <label
+      style="display: flex; flex-direction: column;"
+    >
+      内容
+      <input
+        id="content"
+        style="width: 500px;"
+        type="text"
+        value=""
+      />
+    </label>
+    <button
+      style="width: 100px; margin-top: 16px;"
+    >
+      Post
+    </button>
+  </form>
+</DocumentFragment>
+`;

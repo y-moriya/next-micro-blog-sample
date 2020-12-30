@@ -20,7 +20,14 @@ jest.mock('@prisma/client', () => ({
           userId: 1,
         },
       ]),
-      create: jest.fn(() => []),
+      create: jest.fn(() => [
+        {
+          id: 2,
+          content: 'mocked content 2',
+          createdAt: new Date(),
+          userId: 1,
+        },
+      ]),
     },
   })),
 }))
@@ -57,7 +64,6 @@ describe('/api/posts', () => {
   it('should return 201 when create', async () => {
     const { req, res } = createMocks({
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
       body: JSON.stringify({ content: 'mocked content' }),
@@ -69,5 +75,6 @@ describe('/api/posts', () => {
 
     await handlePosts(req, res)
     expect(res._getStatusCode()).toBe(201)
+    expect(JSON.parse(res._getData())[0].content).toEqual('mocked content 2')
   })
 })

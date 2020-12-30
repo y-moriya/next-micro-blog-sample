@@ -10,9 +10,13 @@ const PostList = () => {
 
   return (
     <ul>
-      {posts.map((post) => (
+      {posts.map((post: any) => (
         <li key={post.id}>
           <span>{post.content}</span>
+          {' '}
+          <span>{post.createdAt.toString()}</span>
+          {' '}
+          <span>{post.User.name}</span>
         </li>
       ))}
     </ul>

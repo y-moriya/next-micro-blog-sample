@@ -26,12 +26,22 @@ describe('PostList', () => {
   })
 
   it('should return posts', async () => {
-    const posts: Post[] = [
+    const date = new Date()
+    const posts = [
       {
         id: 1,
         content: 'mocked content',
-        createdAt: new Date(),
+        createdAt: date,
         userId: 1,
+        User: {
+          id: 1,
+          name: "Yu MORIYA",
+          email: "euro21st@gmail.com",
+          emailVerified: true,
+          image: "c",
+          createdAt: date,
+          updatedAt: date
+        }
       },
     ]
     const value = { data: posts, isLoading: false }
@@ -39,6 +49,6 @@ describe('PostList', () => {
 
     const result = render(<PostList />)
 
-    expect(result.container.textContent).toEqual('mocked content')
+    expect(result.container.textContent).toEqual(`mocked content ${date} Yu MORIYA`)
   })
 })
