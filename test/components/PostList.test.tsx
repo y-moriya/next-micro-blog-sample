@@ -2,7 +2,6 @@ import React from 'react'
 import { usePostsQuery } from '../../hooks/usePostsQuery'
 import PostList from '../../components/PostList'
 import { render } from '@testing-library/react'
-import { Post } from '@prisma/client'
 
 jest.mock('../../hooks/usePostsQuery')
 
@@ -26,7 +25,7 @@ describe('PostList', () => {
   })
 
   it('should return posts', async () => {
-    const date = new Date()
+    const date = new Date('2020-12-31')
     const posts = [
       {
         id: 1,
@@ -37,7 +36,7 @@ describe('PostList', () => {
           id: 1,
           name: "Yu MORIYA",
           email: "euro21st@gmail.com",
-          emailVerified: true,
+          emailVerified: date,
           image: "c",
           createdAt: date,
           updatedAt: date
@@ -49,6 +48,6 @@ describe('PostList', () => {
 
     const result = render(<PostList />)
 
-    expect(result.container.textContent).toEqual(`mocked content ${date} Yu MORIYA`)
+    expect(result.container.textContent).toEqual(`mocked content 2020/12/31 09:00:00 Yu MORIYA`)
   })
 })

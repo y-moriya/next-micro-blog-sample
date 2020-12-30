@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { usePostsQuery } from '../hooks/usePostsQuery'
+import FormatDate from './FormatDate'
 
 const PostList = () => {
   const { data: posts, isLoading } = usePostsQuery()
@@ -14,7 +15,7 @@ const PostList = () => {
         <li key={post.id}>
           <span>{post.content}</span>
           {' '}
-          <span>{post.createdAt.toString()}</span>
+          <FormatDate date={post.createdAt} />
           {' '}
           <span>{post.User.name}</span>
         </li>
