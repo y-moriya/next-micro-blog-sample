@@ -7,7 +7,7 @@ import { Post } from '@prisma/client'
 jest.mock('../../hooks/usePostsQuery')
 
 describe('PostList', () => {
-  it('should return loading when is loading', async () => {
+  it('should return loading when isLoading = true', async () => {
     const value = { data: [], isLoading: true }
     ;(usePostsQuery as jest.Mock).mockReturnValueOnce(value)
 

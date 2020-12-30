@@ -8,7 +8,10 @@ type Data = {
   content: string
 }
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export default async function handlePosts(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const session = await getSession({ req })
 
   if (!session) return res.status(401).end('Please log in to view')
