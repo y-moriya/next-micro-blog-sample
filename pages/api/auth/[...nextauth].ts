@@ -23,6 +23,7 @@ const options = {
   callbacks: {
     session: async (session, user) => {
       session.user.id = user.id
+      session.user.image = user.image
 
       return Promise.resolve(session)
     },
