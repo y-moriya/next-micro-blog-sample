@@ -19,10 +19,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: yarn --ignore-engines install
+      - name: yarn install
         uses: borales/actions-yarn@v2.0.0
         with:
-          cmd: install
+          cmd: install --ignore-engines
       - name: yarn build-app
         uses: borales/actions-yarn@v2.0.0
         with:
