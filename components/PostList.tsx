@@ -1,6 +1,7 @@
+import { Post } from '@prisma/client'
 import * as React from 'react'
 import { usePostsQuery } from '../hooks/usePostsQuery'
-import FormatDate from './FormatDate'
+import PostCmp from './PostCmp'
 
 const PostList = () => {
   const { data: posts, isLoading } = usePostsQuery()
@@ -10,17 +11,11 @@ const PostList = () => {
   if (posts.length === 0) return <span>no posts</span>
 
   return (
-    <ul>
+    <>
       {posts.map((post: any) => (
-        <li key={post.id}>
-          <span>{post.content}</span>
-          {' '}
-          <FormatDate date={post.createdAt} />
-          {' '}
-          <span>{post.User.name}</span>
-        </li>
+        <PostCmp key={post.id} post={post as Post} user={post.User} />
       ))}
-    </ul>
+    </>
   )
 }
 

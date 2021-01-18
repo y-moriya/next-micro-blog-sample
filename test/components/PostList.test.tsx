@@ -34,13 +34,13 @@ describe('PostList', () => {
         userId: 1,
         User: {
           id: 1,
-          name: "Yu MORIYA",
-          email: "euro21st@gmail.com",
+          name: 'Yu MORIYA',
+          email: 'euro21st@gmail.com',
           emailVerified: date,
-          image: "c",
+          image: 'c',
           createdAt: date,
-          updatedAt: date
-        }
+          updatedAt: date,
+        },
       },
     ]
     const value = { data: posts, isLoading: false }
@@ -48,6 +48,7 @@ describe('PostList', () => {
 
     const result = render(<PostList />)
 
-    expect(result.container.textContent).toEqual(`mocked content 2020/12/31 09:00:00 Yu MORIYA`)
+    expect(result.container.textContent).toContain(`Yu MORIYA`)
+    expect(result.container.textContent).toContain(`mocked content`)
   })
 })
