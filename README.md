@@ -2,4 +2,20 @@
 
 # NextJS Micro Blog Sample
 
-now writing...
+A sample app using Next.js, Prisma, Next-Auth, React-Query, TailwindCSS and jest.
+
+## Demo
+
+Here is a working live demo: https://next-micro-blog-sample.vercel.app/
+
+## Setup
+
+...
+
+## Usage
+
+...
+
+## License
+
+MIT License
