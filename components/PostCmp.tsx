@@ -7,7 +7,7 @@ const PostCmp = ({ post, user }: { post: Post; user: User }) => {
       <div className="bg-white max-w-lg mx-auto my-1 border border-grey-light">
         <div className="flex pt-4 px-4">
           <div className="w-16 mr-2">
-            <img className="p-2 rounded" src={user.image} alt="icon" />
+            <img className="p-2 rounded-full" src={user.image} alt="icon" />
           </div>
           <div className="px-2 pt-2 flex-grow">
             <header>

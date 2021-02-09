@@ -49,9 +49,7 @@ const Header = () => {
                 <li>
                   <button
                     className="dropdown-button"
-                    onClick={() =>
-                      signIn('google', { callbackUrl: callbackUrl })
-                    }
+                    onClick={() => signIn({ callbackUrl: callbackUrl })}
                   >
                     Sign in
                   </button>
@@ -102,9 +100,7 @@ const Header = () => {
             </div>
           ) : null}
           {!loading && !session && (
-            <button
-              onClick={() => signIn('google', { callbackUrl: callbackUrl })}
-            >
+            <button onClick={() => signIn({ callbackUrl: callbackUrl })}>
               Sign in
             </button>
           )}
