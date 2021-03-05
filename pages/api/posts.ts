@@ -19,6 +19,10 @@ export default async function handlePosts(
   const userId = session.user.id
 
   if (req.method === 'GET') {
+    const page = parseInt(req.query.page as string) || 0
+    const pageSize = 3
+    const allPosts = await prisma.post.findMany({})
+    const postCount = allPosts.length
     const posts = await prisma.post.findMany({
       include: {
         User: true,
@@ -26,9 +30,13 @@ export default async function handlePosts(
       orderBy: {
         createdAt: 'desc',
       },
+      skip: page * pageSize,
+      take: pageSize,
     })
 
-    return res.status(200).json(posts)
+    return res
+      .status(200)
+      .json({ posts, hasMore: postCount > (page + 1) * pageSize })
   }
 
   if (req.method === 'POST') {

@@ -7,6 +7,7 @@ import fetchMock from 'fetch-mock'
 describe('usePostsQuery', () => {
   it('should return data', async () => {
     const date = new Date('2020-12-31')
+    const page = 0
     const posts = [
       {
         id: 1,
@@ -15,7 +16,7 @@ describe('usePostsQuery', () => {
         userId: 1,
       },
     ]
-    fetchMock.mock('/api/posts', posts)
+    fetchMock.mock('/api/posts?page=0', posts)
 
     const queryClient = new QueryClient({
       defaultOptions: {
@@ -28,9 +29,12 @@ describe('usePostsQuery', () => {
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     )
 
-    const { result, waitForNextUpdate } = renderHook(() => usePostsQuery(), {
-      wrapper,
-    })
+    const { result, waitForNextUpdate } = renderHook(
+      () => usePostsQuery(page),
+      {
+        wrapper,
+      }
+    )
 
     expect(result.current.isLoading).toBe(true)
 
