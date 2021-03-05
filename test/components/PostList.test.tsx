@@ -7,7 +7,7 @@ jest.mock('../../hooks/usePostsQuery')
 
 describe('PostList', () => {
   it('should return loading when isLoading = true', async () => {
-    const value = { data: [], isLoading: true }
+    const value = { data: { posts: [], hasMore: false }, isLoading: true }
     ;(usePostsQuery as jest.Mock).mockReturnValueOnce(value)
 
     const result = render(<PostList />)
@@ -16,7 +16,7 @@ describe('PostList', () => {
   })
 
   it('should return empty when no posts exist', async () => {
-    const value = { data: [], isLoading: false }
+    const value = { data: { posts: [], hasMore: false }, isLoading: false }
     ;(usePostsQuery as jest.Mock).mockReturnValueOnce(value)
 
     const result = render(<PostList />)
@@ -43,7 +43,7 @@ describe('PostList', () => {
         },
       },
     ]
-    const value = { data: posts, isLoading: false }
+    const value = { data: { posts: posts, hasMore: false }, isLoading: false }
     ;(usePostsQuery as jest.Mock).mockReturnValueOnce(value)
 
     const result = render(<PostList />)
