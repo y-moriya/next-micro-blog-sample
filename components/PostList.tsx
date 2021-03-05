@@ -6,8 +6,21 @@ import PostCmp from './PostCmp'
 const PostList = () => {
   const [page, setPage] = React.useState(0)
   const { data, isLoading, isPreviousData } = usePostsQuery(page)
+  const loadingObj = (
+    <div className="bg-white max-w-lg mx-auto my-1">
+      <div className="flex pt-4 px-4 justify-center">
+        <div className="inline-block md:mx-2">
+          <img
+            src="/loading.svg"
+            alt="Loading..."
+            className="animate-spin h-12 w-12 text-gray-800"
+          />
+        </div>
+      </div>
+    </div>
+  )
 
-  if (isLoading) return <span>Now loading...</span>
+  if (isLoading) return loadingObj
 
   if (data.posts.length === 0) return <span>no posts</span>
 
@@ -28,9 +41,11 @@ const PostList = () => {
       >
         Next Page
       </button>
-      {data.posts.map((post: any) => (
-        <PostCmp key={post.id} post={post as Post} user={post.User} />
-      ))}
+      {isLoading
+        ? loadingObj
+        : data.posts.map((post: any) => (
+            <PostCmp key={post.id} post={post as Post} user={post.User} />
+          ))}
     </>
   )
 }
