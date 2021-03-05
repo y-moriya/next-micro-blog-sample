@@ -46,8 +46,22 @@ exports[`Home page matches snapshot 1`] = `
       </div>
     </form>
   </div>
-  <span>
-    Now loading...
-  </span>
+  <div
+    class="bg-white max-w-lg mx-auto my-1"
+  >
+    <div
+      class="flex pt-4 px-4 justify-center"
+    >
+      <div
+        class="inline-block md:mx-2"
+      >
+        <img
+          alt="Loading..."
+          class="animate-spin h-12 w-12 text-gray-800"
+          src="/loading.svg"
+        />
+      </div>
+    </div>
+  </div>
 </DocumentFragment>
 `;

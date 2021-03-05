@@ -12,7 +12,7 @@ describe('PostList', () => {
 
     const result = render(<PostList />)
 
-    expect(result.container.textContent).toEqual('Now loading...')
+    expect(result.getByAltText('Loading...')).not.toBeNull
   })
 
   it('should return empty when no posts exist', async () => {

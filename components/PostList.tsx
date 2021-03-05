@@ -5,7 +5,7 @@ import PostCmp from './PostCmp'
 
 const PostList = () => {
   const [page, setPage] = React.useState(0)
-  const { data, isLoading, isPreviousData } = usePostsQuery(page)
+  const { data, isLoading, isFetching, isPreviousData } = usePostsQuery(page)
   const loadingObj = (
     <div className="bg-white max-w-lg mx-auto my-1">
       <div className="flex pt-4 px-4 justify-center">
@@ -41,7 +41,7 @@ const PostList = () => {
       >
         Next Page
       </button>
-      {isLoading
+      {isFetching && isPreviousData
         ? loadingObj
         : data.posts.map((post: any) => (
             <PostCmp key={post.id} post={post as Post} user={post.User} />
