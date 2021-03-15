@@ -34,9 +34,11 @@ export default async function handlePosts(
       take: pageSize,
     })
 
-    return res
-      .status(200)
-      .json({ posts, hasMore: postCount > (page + 1) * pageSize })
+    return res.status(200).json({
+      posts,
+      hasMore: postCount > (page + 1) * pageSize,
+      pageNumbers: Math.ceil(postCount / pageSize),
+    })
   }
 
   if (req.method === 'POST') {
