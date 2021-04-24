@@ -24,28 +24,48 @@ const PostList = () => {
 
   if (data.posts.length === 0) return <span>no posts</span>
 
-  return (
-    <>
-      <span>Current Page: {page + 1}</span>
+  const paginationObj = (
+    <div className="flex mx-auto items-center justify-center mt-8 mb-4 max-w-lg">
       <button
         onClick={() => setPage((old) => Math.max(old - 1, 0))}
         disabled={page === 0}
+        className="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100"
       >
-        Previous Page
-      </button>{' '}
+        ＜
+      </button>
+      {[...Array(data?.pageNumbers)].map((_, i) => (
+        <button
+          key={i}
+          onClick={() => {
+            setPage(i)
+          }}
+          disabled={page === i}
+          className="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100"
+        >
+          {i + 1}
+        </button>
+      ))}
       <button
         onClick={() => {
           setPage((old) => (data?.hasMore ? old + 1 : old))
         }}
         disabled={isPreviousData || !data?.hasMore}
+        className="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100"
       >
-        Next Page
+        ＞
       </button>
+    </div>
+  )
+
+  return (
+    <>
+      {paginationObj}
       {isFetching && isPreviousData
         ? loadingObj
         : data.posts.map((post: any) => (
             <PostCmp key={post.id} post={post as Post} user={post.User} />
           ))}
+      {paginationObj}
     </>
   )
 }

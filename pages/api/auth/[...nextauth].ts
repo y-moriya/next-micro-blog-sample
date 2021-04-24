@@ -1,7 +1,7 @@
-import NextAuth from 'next-auth'
+import NextAuth, { Session } from 'next-auth'
 import Providers from 'next-auth/providers'
 import Adapters from 'next-auth/adapters'
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, User } from '@prisma/client'
 let prisma
 
 if (process.env.NODE_ENV === 'production') {
@@ -25,9 +25,11 @@ const options = {
   ],
   adapter: Adapters.Prisma.Adapter({ prisma }),
   callbacks: {
-    session: async (session, user) => {
-      session.user.id = user.id
-      session.user.image = user.image
+    session: async (session: Session, user: User) => {
+      const sessionUser = session.user as User
+      sessionUser.id = user.id
+      sessionUser.image = user.image
+      session.user = sessionUser
 
       return Promise.resolve(session)
     },

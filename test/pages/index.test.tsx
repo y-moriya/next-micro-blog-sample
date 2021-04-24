@@ -1,8 +1,9 @@
 import React from 'react'
 import { render } from '../testUtils'
 import { Home } from '../../pages/index'
-import client, { Session } from 'next-auth/client'
+import client from 'next-auth/client'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { Session } from 'node-mocks-http'
 
 jest.mock('next-auth/client')
 

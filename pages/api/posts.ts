@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, User } from '@prisma/client'
 import { getSession } from 'next-auth/client'
 
 const prisma = new PrismaClient()
@@ -16,7 +16,7 @@ export default async function handlePosts(
 
   if (!session) return res.status(401).end('Please log in to view')
 
-  const userId = session.user.id
+  const userId = (session.user as User).id
 
   if (req.method === 'GET') {
     const page = parseInt(req.query.page as string) || 0
@@ -34,9 +34,11 @@ export default async function handlePosts(
       take: pageSize,
     })
 
-    return res
-      .status(200)
-      .json({ posts, hasMore: postCount > (page + 1) * pageSize })
+    return res.status(200).json({
+      posts,
+      hasMore: postCount > (page + 1) * pageSize,
+      pageNumbers: Math.ceil(postCount / pageSize),
+    })
   }
 
   if (req.method === 'POST') {

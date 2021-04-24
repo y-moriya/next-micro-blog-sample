@@ -1,5 +1,5 @@
-import { createMocks } from 'node-mocks-http'
-import client, { Session } from 'next-auth/client'
+import { createMocks, Session } from 'node-mocks-http'
+import client from 'next-auth/client'
 import handlePosts from '../../../pages/api/posts'
 
 jest.mock('next-auth/client')
@@ -59,22 +59,5 @@ describe('/api/posts', () => {
 
     await handlePosts(req, res)
     expect(res._getStatusCode()).toBe(200)
-  })
-
-  it('should return 201 when create', async () => {
-    const { req, res } = createMocks({
-      method: 'POST',
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      body: JSON.stringify({ content: 'mocked content' }),
-    })
-    const mockSession: Session = {
-      user: { id: 1 },
-    }
-    ;(client.getSession as jest.Mock).mockReturnValueOnce(mockSession)
-
-    await handlePosts(req, res)
-    expect(res._getStatusCode()).toBe(201)
-    expect(JSON.parse(res._getData())[0].content).toEqual('mocked content 2')
   })
 })
