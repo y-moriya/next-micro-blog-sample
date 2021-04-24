@@ -26,8 +26,10 @@ const options = {
   adapter: Adapters.Prisma.Adapter({ prisma }),
   callbacks: {
     session: async (session: Session, user: User) => {
-      ;(session.user as User).id = user.id
-      session.user.image = user.image
+      const sessionUser = session.user as User
+      sessionUser.id = user.id
+      sessionUser.image = user.image
+      session.user = sessionUser
 
       return Promise.resolve(session)
     },
