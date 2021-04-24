@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/client'
 
 const Header = () => {
-  const callbackUrl = process.env.baseUrl + '/'
   const [session, loading] = useSession()
   return (
     <nav className="bg-white shadow-lg">
@@ -47,17 +46,14 @@ const Header = () => {
               </li>
               {!loading && !session && (
                 <li>
-                  <button
-                    className="dropdown-button"
-                    onClick={() => signIn({ callbackUrl: callbackUrl })}
-                  >
+                  <button className="dropdown-button" onClick={() => signIn}>
                     Sign in
                   </button>
                 </li>
               )}
               {!loading && session && (
                 <li>
-                  <button className="dropdown-button" onClick={signOut}>
+                  <button className="dropdown-button" onClick={() => signOut}>
                     Sign out
                   </button>
                 </li>
@@ -85,9 +81,7 @@ const Header = () => {
             </div>
           ) : null}
           {!loading && !session && (
-            <button onClick={() => signIn({ callbackUrl: callbackUrl })}>
-              Sign in
-            </button>
+            <button onClick={() => signIn()}>Sign in</button>
           )}
           {!loading && session && (
             <div className="inline md:mx-2">
@@ -103,7 +97,7 @@ const Header = () => {
                     </Link>
                   </li>
                   <li>
-                    <button className="dropdown-button" onClick={signOut}>
+                    <button className="dropdown-button" onClick={() => signOut}>
                       Sign out
                     </button>
                   </li>
