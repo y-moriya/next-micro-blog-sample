@@ -1,12 +1,13 @@
 import { Provider } from 'next-auth/client'
 import Head from 'next/head'
+import { ReactElement } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import Header from '../components/Header'
 import '../styles/global.css'
 
 const queryClient = new QueryClient()
-const Layout = ({ children }) => (
+const Layout = ({ children }): ReactElement => (
   <div>
     <Head>
       <title>Next Micro Blog Sample</title>
@@ -19,7 +20,7 @@ const Layout = ({ children }) => (
   </div>
 )
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }): ReactElement {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider session={pageProps.session}>
