@@ -2,6 +2,7 @@ import NextAuth, { Session } from 'next-auth'
 import Providers from 'next-auth/providers'
 import Adapters from 'next-auth/adapters'
 import { PrismaClient, User } from '@prisma/client'
+import { NextAuthRequest, NextAuthResponse } from 'next-auth/internals'
 let prisma
 
 if (process.env.NODE_ENV === 'production') {
@@ -35,4 +36,5 @@ const options = {
     },
   },
 }
-export default (req, res) => NextAuth(req, res, options)
+export default (req: NextAuthRequest, res: NextAuthResponse) =>
+  NextAuth(req, res, options)

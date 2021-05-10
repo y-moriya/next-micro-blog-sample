@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/client'
+import { ReactElement } from 'react'
 
-const Header = () => {
+const Header = (): ReactElement => {
   const [session, loading] = useSession()
   return (
     <nav className="bg-white shadow-lg">

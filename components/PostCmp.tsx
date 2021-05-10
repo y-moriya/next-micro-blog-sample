@@ -1,7 +1,8 @@
 import { Post, User } from '@prisma/client'
+import { ReactElement } from 'react'
 import FormatDate from './FormatDate'
 
-const PostCmp = ({ post, user }: { post: Post; user: User }) => {
+const PostCmp = ({ post, user }: { post: Post; user: User }): ReactElement => {
   return (
     <div className="font-sans">
       <div className="bg-white max-w-lg mx-auto my-1 border border-grey-light">

@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useMutation, useQueryClient } from 'react-query'
 
-const NewPostForm = () => {
+const NewPostForm = (): React.ReactElement => {
   const queryClient = useQueryClient()
 
   const [form, update] = React.useState({

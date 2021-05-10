@@ -1,9 +1,10 @@
 import { Post } from '@prisma/client'
 import * as React from 'react'
+import { ReactElement } from 'react'
 import { usePostsQuery } from '../hooks/usePostsQuery'
 import PostCmp from './PostCmp'
 
-const PostList = () => {
+const PostList = (): ReactElement => {
   const [page, setPage] = React.useState(0)
   const { data, isLoading, isFetching, isPreviousData } = usePostsQuery(page)
   const loadingObj = (

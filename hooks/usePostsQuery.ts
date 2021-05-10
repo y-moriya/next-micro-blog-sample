@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query'
 
-export const usePostsQuery = (page) => {
+export const usePostsQuery = (page: number) => {
   const fetchPosts = (page = 0) => fetch('/api/posts?page=' + page)
   const { data, isLoading, isFetching, isPreviousData } = useQuery(
     ['posts', page],

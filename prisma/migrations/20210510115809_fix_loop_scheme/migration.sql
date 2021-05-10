@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Loop" ALTER COLUMN "status" DROP NOT NULL,
+ALTER COLUMN "nextUpdateAt" DROP NOT NULL;
